@@ -49,6 +49,7 @@ __usage() {
   -l, --list-pools  : List all pools with \"${BLOCK_POOLNAME_KEYWORD}\" in the name
   -n, --namespace   : Kubernetes namespace where rook-ceph is installed
   -p, --pool        : Name of Ceph RBD Block Pool to check
+  -d, --delete      : Delete RBD Images
   -q, --quiet       : Reduced output
   -h, --help        : This usage statement
   -v, --version     : Script version
