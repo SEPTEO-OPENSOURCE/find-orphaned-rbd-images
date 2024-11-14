@@ -170,6 +170,7 @@ BLOCK_POOLNAME_KEYWORD="block"
 FALSE=0
 TRUE=1
 QUIET="$FALSE"
+DELETE="$FALSE"
 timestamp_format="+%Y-%m-%dT%H:%M:%S%z"  # 2023-09-25T12:56:02-0400
 
 # ---[ Process Argument List ]-------------------------------------------------
@@ -191,6 +192,9 @@ if [ "$#" -ne 0 ]; then
         ;;
       -q|--quiet)
         QUIET="$TRUE"
+        ;;
+      -d|--delete)
+        DELETE="$TRUE"
         ;;
       -h|--help)
         __usage
@@ -260,6 +264,10 @@ for IMAGE in "${RBD_IMAGES[@]}"; do
         then
           echo "** Rook error getting image info."
         fi
+      fi
+      if  [ "$DELETE" -eq "$TRUE" ]; then
+        echo "--[ Remove RBD image on ceph ]-------------------------------------"
+        kubectl -n "${ROOK_NAMESPACE}" exec -it deploy/rook-ceph-tools -- rbd --pool "${POOL_NAME}" rm "${IMAGE}"
       fi
       echo "-------------------------------------------------------------------------"
       IMAGES_NO_PV=$((IMAGES_NO_PV+1))
