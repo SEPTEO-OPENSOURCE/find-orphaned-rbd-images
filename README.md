@@ -7,7 +7,7 @@ Script tries to locate stale/orphaned Ceph RBD images which are no longer refere
 
 * *Script requires the [krew](https://krew.sigs.k8s.io/) rook-ceph plugin for `kubectl` installed*
 
-* Install plugins:
+* Install plugins krew:
 
 ```text
 (
